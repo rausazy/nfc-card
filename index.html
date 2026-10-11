@@ -183,7 +183,7 @@ h1 {
   background: linear-gradient(100deg, #7967f4, #5b4bc8);
 }
 
-.messenger {
+.facebook {
   background: #172344;
 }
 
@@ -287,6 +287,7 @@ footer {
     </div>
 
     <section class="profile">
+
       <div id="photo-container">
         <div class="initials" id="initials">ZR</div>
       </div>
@@ -295,6 +296,7 @@ footer {
       <h1 id="name">Zyrha Alliah Rausa</h1>
       <p class="role" id="role">Web Developer</p>
       <p class="bio" id="bio"></p>
+
     </section>
 
     <div class="actions">
@@ -304,13 +306,14 @@ footer {
       </button>
 
       <a
-        class="btn messenger"
-        id="messenger"
-        href="https://m.me/sinsin0420"
+        class="btn facebook"
+        id="facebook"
+        href="https://www.facebook.com/rausazy/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        💬 &nbsp; Message on Messenger
+        <span aria-hidden="true">f</span>
+        &nbsp; Visit My Facebook Profile
       </a>
 
     </div>
@@ -321,7 +324,7 @@ footer {
 
     <p class="note">
       Save my contact to keep my details handy.
-      Connect with me through Messenger or my social media accounts.
+      Connect with me through Facebook or my social media accounts.
     </p>
 
   </article>
@@ -347,8 +350,7 @@ const CARD = {
   company: "GFL Metro Communities, Inc.",
   website: "https://rausazy.github.io/portfolio/",
 
-  // Username ng taong gusto mong i-message
-  messengerUsername: "sinsin0420",
+  facebook: "https://www.facebook.com/rausazy/",
 
   photo: "assets/profile.jpg",
 
@@ -380,6 +382,10 @@ $("initials").textContent = initials;
 
 document.title = CARD.name + " | Digital Card";
 
+/* FACEBOOK PROFILE */
+
+$("facebook").href = CARD.facebook;
+
 /* PROFILE PHOTO */
 
 if (CARD.photo.trim()) {
@@ -394,23 +400,16 @@ if (CARD.photo.trim()) {
 
     if (!$("photo-container").querySelector(".initials")) {
       const fallback = document.createElement("div");
+
       fallback.className = "initials";
       fallback.textContent = initials;
+
       $("photo-container").appendChild(fallback);
     }
   };
 
   $("photo-container").replaceChildren(img);
 }
-
-/* MESSENGER LINK */
-
-function getMessengerUrl() {
-  const username = CARD.messengerUsername.trim().replace(/^@/, "");
-  return `https://m.me/${encodeURIComponent(username)}`;
-}
-
-$("messenger").href = getMessengerUrl();
 
 /* SOCIAL LINKS */
 
