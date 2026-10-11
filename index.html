@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080b16">
+<meta name="description" content="Digital business card of Zyrha Alliah Rausa.">
 <title>Zyrha Alliah Rausa | Digital Card</title>
 
 <style>
@@ -286,7 +287,6 @@ footer {
     </div>
 
     <section class="profile">
-
       <div id="photo-container">
         <div class="initials" id="initials">ZR</div>
       </div>
@@ -295,7 +295,6 @@ footer {
       <h1 id="name">Zyrha Alliah Rausa</h1>
       <p class="role" id="role">Web Developer</p>
       <p class="bio" id="bio"></p>
-
     </section>
 
     <div class="actions">
@@ -304,13 +303,17 @@ footer {
         ↓ &nbsp; Save Contact
       </button>
 
-    <a class="btn messenger"
-    href="fb-messenger://"
-    onclick="setTimeout(() => {
-        window.location.href = 'https://m.me/sinsin0420';
-    }, 1500);">
-    💬 &nbsp; Message on Messenger
-    </a>
+      <a
+        class="btn messenger"
+        id="messenger"
+        href="https://m.me/sinsin0420"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        💬 &nbsp; Message on Messenger
+      </a>
+
+    </div>
 
     <div class="label">Find Me Online</div>
 
@@ -330,9 +333,7 @@ footer {
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* =====================================
-   EDIT YOUR PERSONAL DETAILS HERE
-===================================== */
+/* PERSONAL DETAILS */
 
 const CARD = {
   name: "Zyrha Alliah Rausa",
@@ -346,10 +347,9 @@ const CARD = {
   company: "GFL Metro Communities, Inc.",
   website: "https://rausazy.github.io/portfolio/",
 
-  // Facebook username, without the @ symbol
+  // Username ng taong gusto mong i-message
   messengerUsername: "sinsin0420",
 
-  // Profile photo inside the assets folder
   photo: "assets/profile.jpg",
 
   socials: {
@@ -360,9 +360,7 @@ const CARD = {
   }
 };
 
-/* =====================================
-   PAGE SETUP
-===================================== */
+/* PAGE SETUP */
 
 const $ = id => document.getElementById(id);
 
@@ -382,9 +380,7 @@ $("initials").textContent = initials;
 
 document.title = CARD.name + " | Digital Card";
 
-/* =====================================
-   PROFILE PHOTO
-===================================== */
+/* PROFILE PHOTO */
 
 if (CARD.photo.trim()) {
   const img = document.createElement("img");
@@ -398,10 +394,8 @@ if (CARD.photo.trim()) {
 
     if (!$("photo-container").querySelector(".initials")) {
       const fallback = document.createElement("div");
-
       fallback.className = "initials";
       fallback.textContent = initials;
-
       $("photo-container").appendChild(fallback);
     }
   };
@@ -409,10 +403,7 @@ if (CARD.photo.trim()) {
   $("photo-container").replaceChildren(img);
 }
 
-/* =====================================
-   MESSENGER PROFILE LINK
-===================================== */
-
+/* MESSENGER LINK */
 
 function getMessengerUrl() {
   const username = CARD.messengerUsername.trim().replace(/^@/, "");
@@ -421,9 +412,7 @@ function getMessengerUrl() {
 
 $("messenger").href = getMessengerUrl();
 
-/* =====================================
-   SOCIAL LINKS
-===================================== */
+/* SOCIAL LINKS */
 
 const socialIcons = {
   Facebook: "f",
@@ -458,9 +447,7 @@ if (CARD.website.trim()) {
   $("socials").appendChild(link);
 }
 
-/* =====================================
-   NOTIFICATION
-===================================== */
+/* NOTIFICATION */
 
 let toastTimer;
 
@@ -475,9 +462,7 @@ function toast(message) {
   }, 2800);
 }
 
-/* =====================================
-   SAVE CONTACT (.VCF)
-===================================== */
+/* SAVE CONTACT (.VCF) */
 
 function escapeVCard(value = "") {
   return String(value)
