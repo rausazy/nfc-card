@@ -304,13 +304,10 @@ footer {
         ↓ &nbsp; Save Contact
       </button>
 
-      <a
-        class="btn messenger"
-        id="messenger"
-        href="https://m.me/sinsin0420"
-      >
-        💬 &nbsp; Message on Messenger
-      </a>
+    <a class="btn messenger" id="messenger"
+    href="fb-messenger://user-thread/rausazy">
+    💬 &nbsp; Message on Messenger
+    </a>
 
     </div>
 
@@ -415,14 +412,10 @@ if (CARD.photo.trim()) {
    MESSENGER PROFILE LINK
 ===================================== */
 
+
 function getMessengerUrl() {
   const username = CARD.messengerUsername.trim().replace(/^@/, "");
-
-  if (!username || username === "your.username") {
-    return "https://m.me/";
-  }
-
-  return "https://m.me/" + encodeURIComponent(username);
+  return `https://m.me/${encodeURIComponent(username)}`;
 }
 
 $("messenger").href = getMessengerUrl();
