@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b16">
+<title>Your Name | Digital Card</title>
+
+<style>
+:root {
+  --bg: #080b16;
+  --card: #11172c;
+  --purple: #8875ff;
+  --cyan: #75e4e8;
+  --text: #f5f6ff;
+  --muted: #a4acc7;
+  --border: rgba(176,185,230,.16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 28px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 10% 10%, #292052 0, transparent 45%),
+    radial-gradient(ellipse at 90% 90%, #102a39 0, transparent 40%),
+    var(--bg);
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container { width: 100%; max-width: 440px; }
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 4px 15px;
+}
+
+.status { color: var(--cyan); letter-spacing: 1px; }
+
+.card {
+  overflow: hidden;
+  position: relative;
+  padding: 28px 24px 24px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  background: linear-gradient(150deg, #171d36, #0c1020 75%);
+  box-shadow: 0 25px 80px rgba(0,0,0,.4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--purple), #4d4cb4);
+}
+
+.profile { text-align: center; padding: 34px 0 26px; }
+
+.photo {
+  width: 112px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 32px;
+  border: 3px solid var(--purple);
+  box-shadow: 0 0 30px #8875ff35;
+  margin-bottom: 18px;
+}
+
+.initials {
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  background: linear-gradient(145deg, #292d50, #11162b);
+  border: 2px solid var(--purple);
+  font-size: 35px;
+  font-weight: 800;
+  color: #c8c3ff;
+}
+
+.eyebrow {
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: clamp(30px, 8vw, 39px);
+  letter-spacing: -1.5px;
+  margin: 12px 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.role { color: var(--muted); margin: 0; }
+
+.bio {
+  color: #c4c9df;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 310px;
+  margin: 16px auto 0;
+}
+
+.actions { display: grid; gap: 10px; }
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 53px;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.primary {
+  color: white;
+  border: 0;
+  background: linear-gradient(100deg, #7967f4, #5b4bc8);
+}
+
+.messenger { background: #172344; }
+.secondary { background: rgba(255,255,255,.025); color: #dce0f6; }
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 13px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.label::after { content: ""; height: 1px; background: var(--border); flex: 1; }
+
+.socials {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.social {
+  padding: 14px 3px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: rgba(255,255,255,.035);
+  color: #dce0f6;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.social:hover { background: #8875ff20; }
+
+.note {
+  color: #8992b0;
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 20px 0 0;
+}
+
+footer {
+  text-align: center;
+  margin-top: 18px;
+  color: #777f9c;
+  font-size: 11px;
+}
+
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 17px;
+  background: #202744;
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 13px;
+  display: none;
+  width: max-content;
+  max-width: calc(100% - 30px);
+}
+
+@media(max-width:360px) {
+  .card { padding: 22px 16px; }
+  .top { font-size: 9px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+  <div class="top">
+    <span>Digital Business Card</span>
+    <span class="status">● Available</span>
+  </div>
+
+  <article class="card">
+
+    <div class="brand">
+      <span class="logo" id="logo">YN</span>
+      <span id="brand">YOUR NAME</span>
+    </div>
+
+    <section class="profile">
+
+      <div id="photo-container">
+        <div class="initials" id="initials">YN</div>
+      </div>
+
+      <div class="eyebrow">LET'S CONNECT</div>
+      <h1 id="name">Your Name</h1>
+      <p class="role" id="role">Your Title / Profession</p>
+      <p class="bio" id="bio">
+        A short introduction about yourself goes here.
+        Tell people what you do and what you're passionate about.
+      </p>
+
+    </section>
+
+    <div class="actions">
+
+      <button class="btn primary" id="save" type="button">
+        ↓ &nbsp; Save Contact
+      </button>
+
+      <a class="btn messenger" id="messenger"
+         href="https://www.messenger.com/"
+         target="_blank" rel="noopener noreferrer">
+        💬 &nbsp; Message on Messenger
+      </a>
+
+      <button class="btn secondary" id="intro" type="button">
+        ✉ &nbsp; Copy Intro & Open Messenger
+      </button>
+
+    </div>
+
+    <div class="label">Find Me Online</div>
+    <nav class="socials" id="socials" aria-label="Social media"></nav>
+
+    <p class="note">
+      Save my contact to keep my details handy.
+      Connect with me through Messenger or my social media accounts.
+    </p>
+
+  </article>
+
+  <footer>✦ &nbsp; Powered by a simple tap.</footer>
+
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================
+   EDIT YOUR PERSONAL DETAILS HERE
+===================================== */
+
+const CARD = {
+  name: "Zyrha Alliah Rausa",
+  brand: "Your Name",
+  role: "Web Developer",
+
+  bio: "A short introduction about yourself goes here. Tell people what you do and what you're passionate about.",
+
+  email: "rausazyrha@gmail.com",
+  phone: "+63 991 298 8696",
+  company: "GFL Metro Communities, Inc.",
+  website: "rausazy.github.io/portfolio",
+
+  // Facebook username, without the @ symbol
+  messengerUsername: "rausazy",
+
+  introMessage:
+    "Hi! I found your digital business card and would love to connect.",
+
+  // Add a photo in the assets folder, then use:
+  // "assets/profile.jpg"
+  photo: "assets/profile.jpg",
+
+  socials: {
+    Facebook: "",
+    Instagram: "",
+    LinkedIn: "",
+    TikTok: ""
+  }
+};
+
+/* =====================================
+   PAGE SETUP
+===================================== */
+
+const $ = id => document.getElementById(id);
+
+const initials = CARD.name.trim()
+  .split(/\s+/)
+  .slice(0, 2)
+  .map(word => word[0] || "")
+  .join("")
+  .toUpperCase() || "YN";
+
+$("logo").textContent = initials;
+$("brand").textContent = CARD.brand || CARD.name;
+$("name").textContent = CARD.name;
+$("role").textContent = CARD.role;
+$("bio").textContent = CARD.bio;
+$("initials").textContent = initials;
+
+document.title = CARD.name + " | Digital Card";
+
+if (CARD.photo.trim()) {
+  const img = document.createElement("img");
+  img.src = CARD.photo;
+  img.alt = CARD.name + " profile photo";
+  img.className = "photo";
+
+  img.onerror = () => {
+    img.remove();
+  };
+
+  $("photo-container").replaceChildren(img);
+}
+
+function getMessengerUrl() {
+  const username = CARD.messengerUsername.trim().replace(/^@/, "");
+
+  if (username && username !== "your.username") {
+    return "https://m.me/" + encodeURIComponent(username);
+  }
+
+  return "https://www.messenger.com/";
+}
+
+$("messenger").href = getMessengerUrl();
+
+/* =====================================
+   SOCIAL LINKS
+===================================== */
+
+const socialIcons = {
+  Facebook: "f",
+  Instagram: "◎",
+  LinkedIn: "in",
+  TikTok: "♪"
+};
+
+Object.entries(CARD.socials).forEach(([label, url]) => {
+  if (!url || !url.trim()) return;
+
+  const link = document.createElement("a");
+
+  link.className = "social";
+  link.href = url;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = (socialIcons[label] || "↗") + "  " + label;
+
+  $("socials").appendChild(link);
+});
+
+if (CARD.website.trim()) {
+  const link = document.createElement("a");
+
+  link.className = "social";
+  link.href = CARD.website;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "↗ Website";
+
+  $("socials").appendChild(link);
+}
+
+/* =====================================
+   NOTIFICATION
+===================================== */
+
+let toastTimer;
+
+function toast(message) {
+  $("toast").textContent = message;
+  $("toast").style.display = "block";
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    $("toast").style.display = "none";
+  }, 2800);
+}
+
+/* =====================================
+   SAVE CONTACT (.VCF)
+===================================== */
+
+function escapeVCard(value = "") {
+  return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/,/g, "\\,")
+    .replace(/;/g, "\\;");
+}
+
+$("save").addEventListener("click", () => {
+  const parts = CARD.name.trim().split(/\s+/);
+  const firstName = parts.shift() || "";
+  const lastName = parts.join(" ");
+
+  const lines = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    `N:${escapeVCard(lastName)};${escapeVCard(firstName)};;;`,
+    `FN:${escapeVCard(CARD.name)}`,
+    CARD.company ? `ORG:${escapeVCard(CARD.company)}` : "",
+    CARD.role ? `TITLE:${escapeVCard(CARD.role)}` : "",
+    CARD.phone ? `TEL;TYPE=CELL:${escapeVCard(CARD.phone)}` : "",
+    CARD.email ? `EMAIL;TYPE=INTERNET:${escapeVCard(CARD.email)}` : "",
+    CARD.website ? `URL:${escapeVCard(CARD.website)}` : "",
+    "END:VCARD"
+  ].filter(Boolean);
+
+  const blob = new Blob(
+    [lines.join("\r\n")],
+    { type: "text/vcard;charset=utf-8" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download =
+    (CARD.name.replace(/[^a-z0-9]+/gi, "-") || "contact") + ".vcf";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  toast("Contact downloaded! Open the file to save it.");
+});
+
+/* =====================================
+   INTRO MESSAGE + MESSENGER
+===================================== */
+
+$("intro").addEventListener("click", async () => {
+  let copied = false;
+
+  try {
+    await navigator.clipboard.writeText(CARD.introMessage);
+    copied = true;
+  } catch (error) {
+    // Clipboard access may be unavailable in some browser contexts.
+  }
+
+  toast(
+    copied
+      ? "Message copied! Opening Messenger..."
+      : "Opening Messenger. Type your intro message there."
+  );
+
+  window.open(getMessengerUrl(), "_blank", "noopener,noreferrer");
+});
+</script>
+
+</body>
+</html>
