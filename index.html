@@ -304,12 +304,13 @@ footer {
         ↓ &nbsp; Save Contact
       </button>
 
-        <a class="btn messenger" id="messenger"
-        href="https://www.facebook.com/messages/t/rausazy"
-        target="_blank"
-        rel="noopener noreferrer">
-        💬 &nbsp; Message on Messenger
-        </a>
+    <a class="btn messenger"
+    href="fb-messenger://"
+    onclick="setTimeout(() => {
+        window.location.href = 'https://m.me/rausazy';
+    }, 1500);">
+    💬 &nbsp; Message on Messenger
+    </a>
 
     <div class="label">Find Me Online</div>
 
